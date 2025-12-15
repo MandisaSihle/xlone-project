@@ -1,0 +1,77 @@
+<!-- {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>X Clone</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+
+<div class="header">
+    <img src="{% static 'images/x_logo.png' %}" alt="X Logo" class="x-logo">
+</div>
+
+<div class="container">
+
+   
+    <form method="POST"
+          enctype="multipart/form-data"
+          action="{% url 'x_add' %}">
+        {% csrf_token %}
+
+        <input type="text"
+               name="name"
+               placeholder="Your name"
+               required>
+
+        <textarea name="body"
+                  placeholder="What's happening?"
+                  maxlength="140"
+                  required></textarea>
+
+       
+        <input type="file"
+               name="image"
+               accept="image/*">
+
+        <button type="submit">Post</button>
+        <div style="clear: both;"></div>
+    </form>
+
+    {% for x in xs %}
+    <div class="post">
+
+        <strong>{{ x.name }}</strong>
+
+        <p>{{ x.body }}</p>
+
+        {% if x.image %}
+            <img src="{{ x.image.url }}" class="post-image">
+        {% endif %}
+
+        <div class="actions">
+           
+            <button class="like-btn" data-id="{{ x.id }}">❤️</button>
+            <span id="like-count-{{ x.id }}">{{ x.like_count }}</span>
+
+            <a href="{% url 'x_edit' x.id %}">Edit</a>
+            <a href="{% url 'x_delete' x.id %}">Delete</a>
+        </div>
+
+    </div>
+    {% empty %}
+        <p style="text-align:center; color:#536471;">
+            No posts yet.
+        </p>
+    {% endfor %}
+
+</div>
+
+<script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
+ -->

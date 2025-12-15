@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X Clone</title>
+    <img src="{% static 'image/x_logo.png' %}" alt="X Logo" class="x-logo">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
+</head>
+<body class="home">
+    <div class="container">
+{% block content %}
+
+{{content}}
+
+{% endblock %}
+
+
+    </div>
+
+
+
+<script src="{% static 'js/like.js' %}"></script>
+</body>
+</html>
