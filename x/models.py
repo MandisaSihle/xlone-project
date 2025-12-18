@@ -4,7 +4,7 @@ from cloudinary.models import CloudinaryField
 class X(models.Model):
 
     class Meta(object):
-        db_table='X'
+        db_table='x'
 
     name = models.CharField(
         'Name', blank=False, max_length=14, db_index=True, default='Anonymous'

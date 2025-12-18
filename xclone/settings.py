@@ -129,8 +129,8 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-cloudinary.config(
+cloudinary.config (
     cloud_name ='dp4lm83mo', 
     api_key ='724862583546845',
-    api_secrete ='gBs8BRBQMtmTRfjMdxdmTfrwe1w'
+    api_secret ='gBs8BRBQMtmTRfjMdxdmTfrwe1w',
 )

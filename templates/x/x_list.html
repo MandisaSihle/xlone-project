@@ -1,77 +1,96 @@
-<!-- {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>X Clone</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends 'base.html' %}
 
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
+{% load util_tags %}
 
+{% util_date x.created_at %}
 
-<div class="header">
-    <img src="{% static 'images/x_logo.png' %}" alt="X Logo" class="x-logo">
-</div>
+{% load static %}
 
-<div class="container">
+{% block content %}
 
-   
-    <form method="POST"
-          enctype="multipart/form-data"
-          action="{% url 'x_add' %}">
-        {% csrf_token %}
+<div class="main">
+    <div class="main-header">
+        <img src="{% static 'image/X_logo.jpeg' %}" alt="" srcset="" class="logo">
+        <h1>Home</h1>
+    </div>
 
-        <input type="text"
-               name="name"
-               placeholder="Your name"
-               required>
-
-        <textarea name="body"
-                  placeholder="What's happening?"
-                  maxlength="140"
-                  required></textarea>
-
-       
-        <input type="file"
-               name="image"
-               accept="image/*">
-
-        <button type="submit">Post</button>
-        <div style="clear: both;"></div>
-    </form>
-
-    {% for x in xs %}
-    <div class="post">
-
-        <strong>{{ x.name }}</strong>
-
-        <p>{{ x.body }}</p>
-
-        {% if x.image %}
-            <img src="{{ x.image.url }}" class="post-image">
-        {% endif %}
-
-        <div class="actions">
-           
-            <button class="like-btn" data-id="{{ x.id }}">❤️</button>
-            <span id="like-count-{{ x.id }}">{{ x.like_count }}</span>
-
-            <a href="{% url 'x_edit' x.id %}">Edit</a>
-            <a href="{% url 'x_delete' x.id %}">Delete</a>
+    <div class="x-post">
+        <div class="my-icon">
+            <img src="{% static 'image/sample-icon.jpg' %}" alt="">
         </div>
 
+        <div class="input-area">
+            <form action="{% url 'x_add ' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="text" name="name" placeholder="enter your name" maxlength="14" required>
+                <textarea name="body" placeholder="whats happening" maxlength="140" required></textarea>
+                <div class="bottom-area">
+                    <div class="mb-0">
+                        <input type="file" class="form-control form-control-sm" name="image">
+                    </div>
+                    <button class="btn" type="submit">post</button>
+                </div>
+            </form>
+        </div>
     </div>
-    {% empty %}
-        <p style="text-align:center; color:#536471;">
-            No posts yet.
-        </p>
-    {% endfor %}
-
 </div>
 
-<script src="{% static 'js/main.js' %}"></script>
-</body>
-</html>
- -->
+{% if xs.count == 0 %}
+<p class="p3">There is no x now</p>
+ {% else %}
+   {% for x in xs %}
+
+<div class="x-list">
+<div class="x">
+<div class="user">
+<a href="#">
+    <img src="{ % static 'image/sample-icon.jpg' % }" alt="">
+</a>
+</div>
+<div class="content">
+<div class="name">
+<a href="#">
+    <span class="nickname">
+        {{ x.name }}
+    </span>
+
+    <span class="datetime">
+{% util_date x.created_at|date:"y/m/d H:i:s" %}
+    </span>
+</a>
+
+<img src="{% static 'image/icon-small-menu.svg' %}" alt="" class="small-menu js-popover" 
+data-bs-containter="body"
+data-bs-toggle="popover"
+data-bs-placementlift="left"
+data-bs-content="<a href='{% url 'x_edit' x.id %}'>edit</a><br>
+<a href='{% url 'x_delete' x.id %}'>x_delete</a>"
+data-bs-html="True"
+>
+</div>
+<p>
+{{ x.body }}
+</p>
+{% if x.image is not Null %}
+<a href="{{ x.image.url }}" target="_blank"><img src="{{ x.image.url }}" alt="" class="post-image"></a>
+{% endif %}
+<div class="icon-list">
+<span class="like js-like" data-x-id="{{ x.id }}" >
+<img src="{% static 'image/icon-heart-gray.svg' %}" alt="like-icon">
+</span>
+<span class="like-count js-like-count">
+{{ x.like_count }}
+</span>
+</div>
+</div>
+</div>
+{% endfor %}
+{% endif %}
+</div>
+<script src="{% static 'js/like.js' %}"></script>
+
+{% endblock %}
+
+
+
+

@@ -1,54 +1,43 @@
+{% extends 'base.html' %}
+
+{% load util_tags %}
+
+<!-- {% util_date x.created_at %} -->
+
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Edit Post • X Clone</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
+{% block content %}
 
-<!-- X HEADER -->
-<div class="header">
-    <img src="{% static 'images/x_logo.png' %}" alt="X Logo" class="x-logo">
+<div class="main">
+ <img src="{% static 'image/X_logo.jpeg' %}" alt="" srcset="" class="logo">
+ <h1>Edit</h1>
 </div>
 
-<div class="container">
-
-    <h2>Edit Post</h2>
-
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-
-        <!-- Name -->
-        <input type="text"
-               name="name"
-               value="{{ form.instance.name }}"
-               required>
-
-        <!-- Body -->
-        <textarea name="body"
-                  required>{{ form.instance.body }}</textarea>
-
-        <!-- Current Image Preview -->
-        {% if form.instance.image %}
-            <p>Current image:</p>
-            <img src="{{ form.instance.image.url }}" class="post-image">
-        {% endif %}
-
-        <!-- Replace Image -->
-        <label>Replace image</label>
-        <input type="file" name="image" accept="image/*">
-
-        <div style="margin-top: 12px;">
-            <button type="submit">Update</button>
-            <a href="{% url 'post1' %}" style="margin-left: 12px;">Cancel</a>
-        </div>
-    </form>
-
+<div class="x-post">
+<div class="my-icon">
+<img src="{% static 'image/sample-woman.jpg' %}" alt="" class="">
+</div>
+<div class="input-area">
+<form action="" method="post" enctype="multipart/form-data">
+{% csrf_token %}
+<input type="text" name="name" placeholder="your name" value="{{ x.name }}" maxlength="14" required>
+<textarea name="body" id="" placeholder="what's happening" maxlength="140" required>
+    {{ x.body}}
+</textarea>
+{% if x.image is not Null %}
+<img src="{{ x.image.url }}" alt="" class="edit-image">
+{% endif %}
+<div class="bottom-area">
+<div class="mb-0">
+<input type="file" class="form-control form-control-sm" name="image">
+</div>
+<a href="{% url 'post1' %}" class="btn btn-gray">cancel</a>
+<button class="btn" type="submit">
+update
+</button>
+</div>
+</form>
 </div>
 
-</body>
-</html>
+</div>
+{% endblock %}

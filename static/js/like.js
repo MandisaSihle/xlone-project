@@ -13,7 +13,7 @@ $(function(){
                 data: {},
                 headers: {'x-CSRFToken': JS_CSRFTOKEN}
             })
-
+s
             .done((data)=>{
                 var new_like_count = like_count + 1;
                 like_count_obj.html(new_like_count);
