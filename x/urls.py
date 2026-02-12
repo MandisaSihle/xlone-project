@@ -1,11 +1,13 @@
 from django.urls import path
-from . import views
+from .import views
+from x.views import xListView, xAdd, xDelete, xEditView, xLikeAdd, xLikeSubtract
 
 urlpatterns = [
-    path('first/', views.xlistview, name='post1'),
-    path('add/', views.xaddview, name='x_add'),
-    path('edit/<int:x_id>/', views.xedit, name='x_edit'),
-    path('delete/<int:x_id>/', views.xdelete, name='x_delete'),
-    path('like/<int:x_id>/', views.xlikeadd, name='x_like'),
-    path('unlike/<int:x_id>/', views.xlikesubtract, name='x_unlike'),
+   path('first/', xListView, name='post1'),
+    path('xAdd/', xAdd, name='x_add'),
+    path('xDelete/<int:x_id>/', xDelete, name='x_delete'),
+    path('xEditView/<int:x_id>/', xEditView, name='x_edit'),
+    path('xLikeAdd/<int:x_id>/', xLikeAdd, name='x_like_add'),
+    # path('api/xLikeAdd/<int:x_id>/', xLikeAdd, name='like-add')
+    path('xLikeSubtract/<int:x_id>/', xLikeSubtract, name='x_like_subtract'),
 ]

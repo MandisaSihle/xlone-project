@@ -6,7 +6,7 @@ register = template.Library()
 @register.simple_tag
 
 def util_date(time_str):
-    time = datetime.estrptime(time_str, "%y/%m/%d %H: %M: %S ")
+    time = datetime.strptime(time_str, "%y/%m/%d %H:%M:%S")
     now = datetime.now()
     if type(time) is int:
         diff = now - datetime.fromtimestamp(time)
