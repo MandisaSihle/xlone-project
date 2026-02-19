@@ -21,7 +21,7 @@ def xListView(request):
   xs = X.objects.order_by('created_at').reverse().all()[:20]
 
   # Show output with xs
-  return render(request, 'x/x_List.html',
+  return render(request, 'x/x_list.html',
     {'xs': xs})
 
 def xEditView(request, x_id):
@@ -32,7 +32,7 @@ def xEditView(request, x_id):
   if request.method == 'POST':
     form = XForm(request.POST, request.FILES, instance=x)
     if form.is_valid():
-      # Save and redirect to home
+      # Save and redirect to homeS
       form.save()
       # return HttpResponseRedirect('second/first/')
       return redirect('post1')
